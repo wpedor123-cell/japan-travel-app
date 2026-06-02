@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>日本衝衝衝｜旅遊記帳 App</title>
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABOYAAATmCAYAAACF/K4qAAAQAElEQVR4AcT9CYPkyJGlCcoLsnd2jt4+dmb+/2/Zne46WFUs3vdRJItFsnjfzEyH7vtEVAAFDObhQXJ6EfpURJ4cKqqAmXuCkcl3Ly9jbBvYxmbjxUBum21j+Nq20rftLF+2l0H8CduL68045+5jGztvZazXtm2mtnFXb1vrZVytuW2VM4blROqTf3kxn/rwte3Ytm1s2zbWnrfN3JiwTh/bNm1468RvmzljmAPbVvaxVtnbhlzOIe3iqHNgcx+N2lf7to34A/f8+3Lua49T/1WjuXs58tq26odetq30caoFR70t9+WQ0eCMKu/xXOCfo2pVfuus4TovJa+520Yf26hrcw+FFz8TjzhqbFvFVV7N21Yca2zbZnLb622bezC3bStXugOHaaPsbdtM/bXgUh7btmV9emtsW3HbVhJ+20p3yhxlb9s21vOwObi2rf21vzG20de2bWPbAOe2Zf62YQO4M7aNGgV6aWzbNsYAwxfyijG2bUt0ziq3rFv+bSt553eVMUb5N+esMa1vG/4xr21KxDa2rdCxyG0rjohC2VvX34a/y8BmCepM8G/bNsbYBmLbtvRvm+1hIBNjWIzzZf+4wEHbtrkG51u+Ma9ts52YvtSLYw+NbStuUHvzvMOKOTNjWG7bNrZt81rIkde2oYNaYwx0z9sY+3O1lW+zb9xc22ZPouLGHtf8NrrXktjtG2PbWkdWjW3bxhiP2LZtbNvmeo26L9TdtquvbNNjjNbX+FqrfJ634bNpbNZBxWzbNh6v4tb5GrNt29i2zf3OdTdLY0uUb2xjbNuW4OcW2Layh69tK33bSprax7YVRw7YZt26d2PYPeqquG07ZPE9b1a20X+GtbFcThvg5WWMwma5mSuMsY1hbNs2tq2w2tXbNsYAI69t28a2AZ/J/r0+XHeYP2BtjLF5TIzlyvxtbG6KZwBsm21jOGfbSt+2l7F5DeDQUdgs8du3bWOMbSAK23ixUnB/GzGWTmQvyQ/Hj+F55LV5Bulz7pY52+DP8Ay2MaxtD4AF22af8fKyDbBZbltxY7m2bRvnvY7l2qwDi31gg50Y27Z5j+xrS91zSva3bbaM4Wu7wOYcW8Zv2yGn4y8Um/MbVnNscy3fg42eC5wB2LbyZ+hlsitzOU8wBrGetzGwEw56MbaXbVCvzoA1trFtV8CDGfuC/jL62raKzzr2Va3iOmaMsrdtq/WIA7a3Dd/wvQHb2DZjbGNMbNs2PHb/i3vegEkP89vEelbOGcY2xl3M2uM2/MdB2+b8lwPbZn5so67NmrGNYXq8eH2wbS9j20wOMPLatm1s2zY4j20rfdtaHvHbGI6beCk5khzz2mwameu+tpexbZt9W8pt2wZrXLFtxDn+5cC2Vc4Y2xgT27aNbWsMX62TX/oYJa9rtL35HIDDCB1c27bN+1G5w5epccIo37Yda5kZ27aNF2paYo+xeYAxhrkVG3EvRb/YV3kvDnH82Ma2NeBeHOixgRf7gI1hOI7nofeEvm3b2LZt9LUN/7GNr+O2rTjP9o5hc9BDYZ79VutsW0UxZ42Fd+YYYxsjMfLarG8v22CtbbOVGMOizjZ9W/or5lhn3FzbVjWIvWLbyrdtJelv20rftpZzPy8tN6+Nb2RPY7m2Db7jnsttI25z5jb6z7C2YtvsMZaexrZNbu9l3fvq27LHF8cnbuPHvDbLwrZtuQZr7lhyX162qrvLucft6MMV9hrbZgsMywUDHd5wqfHyMoxtbFsBf8Hz5LbtZWyb/WMbfW3bNrZt83Mxfda3rbit422PsY3rtW3b2DZQuWNso6/N+rZ5do0XN/hivbGZ2zZ82xge42WMMe1tgyhso/7wzG0zx4HjuLaRtV98hkve2MbYXrYd5INtMzcxlmvbHvl... [truncated]" />
+  <style>
+    :root {
+      --bg: #fff8f3;
+      --panel: #ffffff;
+      --ink: #3f3a39;
+      --muted: #8b7d78;
+      --line: #f0ded8;
+      --blue: #5f86b3;
+      --blue-dark: #3f6f9f;
+      --sakura: #ef8fa2;
+      --matcha: #9fbd91;
+      --sun: #f1c27d;
+      --shadow: 0 16px 38px rgba(36, 52, 71, 0.10);
+      --radius: 26px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(95,134,179,.12), transparent 34%),
+        radial-gradient(circle at top right, rgba(239,143,162,.16), transparent 28%),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 24px 18px;
+      background: rgba(255,255,255,.84);
+      backdrop-filter: blur(18px);
+      border-right: 1px solid var(--line);
+    }
+
+    .logo {
+      width: 172px;
+      height: 172px;
+      margin: 0 auto 26px;
+      border-radius: 50%;
+      border: 3px solid rgba(239,143,162,.38);
+      box-shadow: var(--shadow);
+      background: #ffffff;
+      display: block;
+      overflow: hidden;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .nav { display: grid; gap: 10px; }
+
+    .tab-btn {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 14px 16px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: 750;
+      font-size: 16px;
+      text-align: left;
+      transition: .18s;
+    }
+
+    .tab-btn:hover { background: #eef6fd; }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #eef6fd, #fff1f4);
+      color: var(--blue-dark);
+      box-shadow: inset 4px 0 0 var(--blue);
+    }
+
+    .trip-mini {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 22px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #eef6fd, #fff3f6);
+      border: 1px solid var(--line);
+    }
+
+    .trip-mini strong { display: block; margin-bottom: 8px; }
+    .trip-mini span { color: var(--muted); font-size: 13px; }
+
+    main { padding: 28px; overflow: hidden; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      gap: 16px;
+    }
+
+    .page-title h1 { margin: 0; font-size: 28px; }
+    .page-title p { margin: 6px 0 0; color: var(--muted); }
+
+    .btn {
+      border: 0;
+      border-radius: 16px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 900;
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 10px 18px rgba(95,134,179,.22);
+    }
+
+    .btn.sakura { background: var(--sakura); box-shadow: 0 10px 18px rgba(239,143,162,.22); }
+    .btn.matcha { background: var(--matcha); box-shadow: 0 10px 18px rgba(130,184,131,.22); }
+    .btn.light { background: #fff0f3; color: #c9566d; box-shadow: none; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    .welcome-card {
+      position: relative;
+      overflow: hidden;
+      padding: 26px 28px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 92% 18%, rgba(239,143,162,.18), transparent 22%),
+        linear-gradient(135deg, #ffffff 0%, #fff4f6 55%, #fffaf3 100%);
+      border: 1px solid rgba(239,143,162,.22);
+      box-shadow: var(--shadow);
+    }
+
+    .welcome-card::after {
+      content: "🌸";
+      position: absolute;
+      right: 30px;
+      top: 26px;
+      font-size: 54px;
+      opacity: .25;
+    }
+
+    .welcome-card small { color: var(--muted); font-weight: 850; }
+    .welcome-card h2 { margin: 8px 0 8px; font-size: 30px; color: var(--ink); }
+    .welcome-card p { margin: 0; color: var(--muted); }
+
+    .progress-card, .card, .summary {
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .progress-card { padding: 26px; }
+    .progress-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 16px; }
+    .progress-percent { color: var(--sakura); font-size: 28px; font-weight: 950; }
+    .progress-bg { height: 16px; background: #f2ece9; border-radius: 999px; overflow: hidden; }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--sakura), var(--sun)); border-radius: 999px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-bottom: 22px; }
+    .summary { padding: 22px; }
+    .summary .icon { width: 54px; height: 54px; border-radius: 18px; display: grid; place-items: center; font-size: 28px; margin-bottom: 14px; }
+    .summary span { color: var(--muted); font-size: 14px; }
+    .summary strong { display: block; margin-top: 8px; font-size: 34px; letter-spacing: -1px; }
+    .pink .icon { background: #ffe8ed; color: var(--sakura); }
+    .green .icon { background: #eaf7eb; color: var(--matcha); }
+    .blue .icon { background: #eef6fd; color: var(--blue); }
+
+    .layout-2 { display: grid; grid-template-columns: 1.3fr .7fr; gap: 22px; }
+    .card { padding: 24px; margin-bottom: 22px; }
+    h2 { margin: 0 0 18px; font-size: 22px; }
+    h3 { margin: 20px 0 12px; }
+
+    .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 14px; font-weight: 650; }
+    input, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 13px 14px;
+      font-size: 15px;
+      background: #fbfdff;
+      color: var(--ink);
+      outline: none;
+    }
+    input:focus, select:focus { border-color: var(--sakura); box-shadow: 0 0 0 4px rgba(239,143,162,.13); }
+
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 18px; overflow: hidden; }
+    th, td { padding: 14px 10px; border-bottom: 1px solid var(--line); text-align: left; font-size: 14px; }
+    th { color: var(--muted); font-size: 13px; background: #fff8fa; }
+    tr:last-child td { border-bottom: 0; }
+    .empty { padding: 44px 20px; text-align: center; color: var(--muted); }
+    .delete { border: 0; background: #fff0f2; color: #c94d61; border-radius: 10px; padding: 6px 9px; cursor: pointer; font-weight: 800; }
+
+    .quick-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .quick {
+      border: 1px dashed rgba(239,143,162,.38);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fbfdff;
+      cursor: pointer;
+      font-weight: 850;
+    }
+
+    .category-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .category-pill { display: flex; justify-content: space-between; align-items: center; background: #fbfdff; border: 1px solid var(--line); border-radius: 18px; padding: 13px 14px; }
+
+    .stats-line { display: grid; grid-template-columns: 150px 1fr 80px; gap: 12px; align-items: center; margin: 12px 0; }
+    .bar-bg { background: #f2ece9; height: 14px; border-radius: 999px; overflow: hidden; }
+    .bar { height: 100%; background: linear-gradient(90deg, var(--sakura), var(--sun)); border-radius: 999px; }
+    .hint { color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .actions { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; }
+
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      aside { position: relative; height: auto; display: block; }
+      .logo { width: 120px; height: 120px; margin-bottom: 16px; }
+      .trip-mini { position: static; margin-top: 16px; }
+      .nav { grid-template-columns: repeat(3, 1fr); }
+      main { padding: 20px; }
+      .hero, .layout-2, .grid, .form-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar { align-items: stretch; flex-direction: column; }
+      .nav { grid-template-columns: 1fr 1fr; }
+      .welcome-card h2 { font-size: 26px; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+      .stats-line { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="logo">
+        <img class="logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABOYAAATmCAYAAACF/K4qAAAQAElEQVR4AcT9CYPkyJGlCcoLsnd2jt4+dmb+/2/Zne46WFUs3vdRJItFsnjfzEyH7vtEVAAFDObhQXJ6EfpURJ4cKqqAmXuCkcl3Ly9jbBvYxmbjxUBum21j+Nq20rftLF+2l0H8CduL68045+5jGztvZazXtm2mtnFXb1vrZVytuW2VM4blROqTf3kxn/rwte3Ytm1s2zbWnrfN3JiwTh/bNm1468RvmzljmAPbVvaxVtnbhlzOIe3iqHNgcx+N2lf7to34A/f8+3Lua49T/1WjuXs58tq26odetq30caoFR70t9+WQ0eCMKu/xXOCfo2pVfuus4TovJa+520Yf26hrcw+FFz8TjzhqbFvFVV7N21Yca2zbZnLb622bezC3bStXugOHaaPsbdtM/bXgUh7btmV9emtsW3HbVhJ+20p3yhxlb9s21vOwObi2rf21vzG20de2bWPbAOe2Zf62YQO4M7aNGgV6aWzbNsYAwxfyijG2bUt0ziq3rFv+bSt553eVMUb5N+esMa1vG/4xr21KxDa2rdCxyG0rjohC2VvX34a/y8BmCepM8G/bNsbYBmLbtvRvm+1hIBNjWIzzZf+4wEHbtrkG51u+Ma9ts52YvtSLYw+NbStuUHvzvMOKOTNjWG7bNrZt81rIkde2oYNaYwx0z9sY+3O1lW+zb9xc22ZPouLGHtf8NrrXktjtG2PbWkdWjW3bxhiP2LZtbNvmeo26L9TdtquvbNNjjNbX+FqrfJ634bNpbNZBxWzbNh6v4tb5GrNt29i2zf3OdTdLY0uUb2xjbNuW4OcW2Layh69tK33bSprax7YVRw7YZt26d2PYPeqquG07ZPE9b1a20X+GtbFcThvg5WWMwma5mSuMsY1hbNs2tq2w2tXbNsYAI69t28a2AZ/J/r0+XHeYP2BtjLF5TIzlyvxtbG6KZwBsm21jOGfbSt+2l7F5DeDQUdgs8du3bWOMbSAK23ixUnB/GzGWTmQvyQ/Hj+F55LV5Bulz7pY52+DP8Ay2MaxtD4AF22af8fKyDbBZbltxY7m2bRvnvY7l2qwDi31gg50Y27Z5j+xrS91zSva3bbaM4Wu7wOYcW8Zv2yGn4y8Um/MbVnNscy3fg42eC5wB2LbyZ+hlsitzOU8wBrGetzGwEw56MbaXbVCvzoA1trFtV8CDGfuC/jL62raKzzr2Va3iOmaMsrdtq/WIA7a3Dd/wvQHb2DZjbGNMbNs2PHb/i3vegEkP89vEelbOGcY2xl3M2uM2/MdB2+b8lwPbZn5so67NmrGNYXq8eH2wbS9j20wOMPLatm1s2zY4j20rfdtaHvHbGI6beCk5khzz2mwameu+tpexbZt9W8pt2wZrXLFtxDn+5cC2Vc4Y2xgT27aNbWsMX62TX/oYJa9rtL35HIDDCB1c27bN+1G5w5epccIo37Yda5kZ27aNF2paYo+xeYAxhrkVG3EvRb/YV3kvDnH82Ma2NeBeHOixgRf7gI1hOI7nofeEvm3b2LZt9LUN/7GNr+O2rTjP9o5hc9BDYZ79VutsW0UxZ42Fd+YYYxsjMfLarG8v22CtbbOVGMOizjZ9W/or5lhn3FzbVjWIvWLbyrdtJelv20rftpZzPy8tN6+Nb2RPY7m2Db7jnsttI25z5jb6z7C2YtvsMZaexrZNbu9l3fvq27LHF8cnbuPHvDbLwrZtuQZr7lhyX162qrvLucft6MMV9hrbZgsMywUDHd5wqfHyMoxtbFsBf8Hz5LbtZWyb/WMbfW3bNrZt83Mxfda3rbit422PsY3rtW3b2DZQuWNso6/N+rZ5do0XN/hivbGZ2zZ82xge42WMMe1tgyhso/7wzG0zx4HjuLaRtV98hkve2MbYXrYd5INtMzcxlmvbHvl... [truncated]" />
+      </div>
+
+      <nav class="nav">
+        <button class="tab-btn active" data-tab="home">🏠 首頁</button>
+        <button class="tab-btn" data-tab="add">➕ 新增消費</button>
+        <button class="tab-btn" data-tab="search">🔎 搜尋</button>
+        <button class="tab-btn" data-tab="categories">🧩 類別管理</button>
+        <button class="tab-btn" data-tab="stats">📊 統計</button>
+        <button class="tab-btn" data-tab="sync">☁️ 雲端同步</button>
+      </nav>
+
+      <div class="trip-mini">
+        <strong id="sideTripName">我的日本旅行</strong>
+        <span>記錄每一筆日旅花費</span>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div class="page-title">
+          <h1 id="mainTitle">首頁</h1>
+        </div>
+        <button class="btn sakura" onclick="switchTab('add')">＋ 新增消費</button>
+      </div>
+
+      <section id="home" class="page active">
+        <div class="hero">
+          <div class="welcome-card">
+            <small id="heroTrip">我的日本旅行</small>
+            <h2>準備好今天的日本冒險了嗎？</h2>
+            <p id="heroSub">玩得開心，花得清楚。剩餘預算會在下方卡片即時更新。</p>
+          </div>
+          <div class="progress-card">
+            <div class="progress-head">
+              <div>
+                <h2>預算進度</h2>
+                <p class="hint" id="progressText">已花費 ¥0 / 預算 ¥0</p>
+              </div>
+              <div class="progress-percent" id="progressPercent">0%</div>
+            </div>
+            <div class="progress-bg"><div class="progress-bar" id="progressBar"></div></div>
+            <br>
+            <button class="btn light" onclick="switchTab('stats')">查看統計</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="summary pink"><div class="icon">👛</div><span>已花費（日圓）</span><strong id="totalYen">¥0</strong></div>
+          <div class="summary green"><div class="icon">💵</div><span>約台幣</span><strong id="totalNtd">NT$0</strong></div>
+          <div class="summary blue"><div class="icon">💴</div><span>剩餘預算（日圓）</span><strong id="remainYen">¥0</strong></div>
+        </div>
+
+        <div class="layout-2">
+          <div class="card">
+            <h2>最近消費</h2>
+            <div id="recentTable"></div>
+          </div>
+          <div class="card">
+            <h2>快速新增</h2>
+            <div class="quick-grid" id="quickAdd"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>旅程設定</h2>
+          <div class="form-grid">
+            <div><label>旅程名稱</label><input id="tripName" placeholder="例如：東京 9 日自由行" /></div>
+            <div><label>總預算（日圓）</label><input id="budget" type="number" min="0" /></div>
+            <div><label>匯率：1 日圓 = 幾台幣</label><input id="rate" type="number" step="0.001" min="0" /></div>
+          </div>
+          <br><button class="btn matcha" onclick="saveSettings()">儲存設定</button>
+        </div>
+      </section>
+
+      <section id="add" class="page">
+        <div class="card">
+          <h2>新增一筆消費</h2>
+          <div class="form-grid">
+            <div><label>日期</label><input id="date" type="date" /></div>
+            <div><label>金額（日圓）</label><input id="amount" type="number" min="1" placeholder="1280" /></div>
+            <div><label>類別</label><select id="category"></select></div>
+            <div><label>地點</label><input id="place" placeholder="新宿" /></div>
+            <div><label>付款方式</label><select id="payment"><option>現金</option><option>信用卡</option><option>Suica / IC 卡</option><option>PayPay</option><option>其他</option></select></div>
+            <div><label>備註</label><input id="note" placeholder="一蘭拉麵" /></div>
+          </div>
+          <br><button class="btn sakura" onclick="addExpense()">加入記帳</button>
+        </div>
+      </section>
+
+      <section id="search" class="page">
+        <div class="card">
+          <h2>搜尋消費</h2>
+          <div class="actions">
+            <div style="flex:1; min-width:240px;"><label>搜尋金額、類別、地點、付款方式或備註</label><input id="keyword" placeholder="例如：新宿、拉麵、信用卡" oninput="renderSearch()" /></div>
+            <button class="btn" onclick="renderSearch()">搜尋</button>
+            <button class="btn light" onclick="clearSearch()">清除</button>
+          </div>
+        </div>
+        <div class="card"><div id="searchTable"></div></div>
+      </section>
+
+      <section id="categories" class="page">
+        <div class="card">
+          <h2>自訂類別</h2>
+          <div class="form-grid">
+            <div><label>圖示 Emoji</label><input id="newEmoji" placeholder="⛩️" /></div>
+            <div><label>類別名稱</label><input id="newCategory" placeholder="御守" /></div>
+            <div class="actions"><button class="btn sakura" onclick="addCategory()">新增類別</button></div>
+          </div>
+          <p class="hint">刪除類別不會刪除過去的消費紀錄，只是不會再出現在新增消費選單。</p>
+          <div class="category-list" id="categoryList"></div>
+        </div>
+      </section>
+
+      <section id="stats" class="page">
+        <div class="card"><h2>花費統計</h2><div id="statsContent"></div></div>
+      </section>
+
+      <section id="sync" class="page">
+        <div class="card">
+          <h2>☁️ 雲端數據同步</h2>
+          <p class="hint">透過 Google Sheets 備份您的旅程資料，並在不同裝置間同步。</p>
+          <hr style="border:0; border-top:1px solid var(--line); margin:20px 0;">
+          
+          <div class="form-grid">
+            <div style="grid-column: span 3;">
+              <label>Apps Script Web App URL</label>
+              <input id="syncUrl" placeholder="https://script.google.com/macros/s/.../exec" onchange="saveSettings(true)" />
+            </div>
+          </div>
+          
+          <div style="margin-top:24px; display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+            <div class="card" style="margin-bottom:0; background:#f0f7ff;">
+              <h3>📤 上傳資料</h3>
+              <p class="hint" style="font-size:12px;">將目前手機/電腦上的記帳資料存入雲端試算表。</p>
+              <br>
+              <button class="btn blue" style="width:100%;" onclick="syncDataToCloud(this)">上傳至雲端</button>
+            </div>
+            <div class="card" style="margin-bottom:0; background:#fff0f3;">
+              <h3>📥 下載資料</h3>
+              <p class="hint" style="font-size:12px;">從雲端試算表抓取資料，並<strong style="color:var(--sakura);">覆蓋</strong>目前裝置的數據。</p>
+              <br>
+              <button class="btn sakura" style="width:100%;" onclick="syncDataFromCloud(this)">從雲端下載</button>
+            </div>
+          </div>
+          
+          <div style="margin-top:20px;">
+            <h3>如何設定？</h3>
+            <ol class="hint" style="padding-left:20px;">
+              <li>建立一份 Google 試算表。</li>
+              <li>點擊「擴充功能」 > 「Apps Script」。</li>
+              <li>貼上同步用的 Script 程式碼並部署為「網頁應用程式」。</li>
+              <li>將產生的網址貼在上方欄位即可開始同步！</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "japan_chong_chong_chong_data_v4";
+    const defaultData = {
+      tripName: "我的日本旅行",
+      budget: 0,
+      rate: 0.215,
+      syncUrl: "",
+      categories: [
+        { name: "餐飲", emoji: "🍜" },
+        { name: "交通", emoji: "🚄" },
+        { name: "購物", emoji: "🛍️" },
+        { name: "住宿", emoji: "🏨" },
+        { name: "景點", emoji: "⛩️" },
+        { name: "便利商店", emoji: "🧃" },
+        { name: "伴手禮", emoji: "🎁" }
+      ],
+      expenses: []
+    };
+
+    let data = loadData();
+
+    function clone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+
+    function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return clone(defaultData);
+      try {
+        const parsed = JSON.parse(saved);
+        return normalizeData(parsed);
+      } catch {
+        return clone(defaultData);
+      }
+    }
+
+    function normalizeData(value) {
+      const result = { ...clone(defaultData), ...(value || {}) };
+      if (!Array.isArray(result.categories)) result.categories = clone(defaultData.categories);
+      if (!Array.isArray(result.expenses)) result.expenses = [];
+      result.budget = Number(result.budget || 0);
+      result.rate = Number(result.rate || defaultData.rate);
+      result.syncUrl = result.syncUrl || "";
+      return result;
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function setText(id, value) {
+      const el = byId(id);
+      if (el) el.textContent = value;
+    }
+
+    function setValue(id, value) {
+      const el = byId(id);
+      if (el) el.value = value;
+    }
+
+    function setHTML(id, value) {
+      const el = byId(id);
+      if (el) el.innerHTML = value;
+    }
+
+    function moneyYen(value) {
+      return `¥${Math.round(Number(value || 0)).toLocaleString()}`;
+    }
+
+    function moneyNtd(value) {
+      return `NT$${Math.round(Number(value || 0)).toLocaleString()}`;
+    }
+
+    function today() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    const pageNames = { home: "首頁", add: "新增消費", search: "搜尋", categories: "類別管理", stats: "統計", sync: "雲端同步" };
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tabId));
+      document.querySelectorAll(".page").forEach(page => page.classList.toggle("active", page.id === tabId));
+      setText("mainTitle", pageNames[tabId] || "首頁");
+      renderAll();
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(btn => btn.addEventListener("click", () => switchTab(btn.dataset.tab)));
+
+    function saveSettings(silent = false) {
+      const tripNameEl = byId("tripName");
+      const budgetEl = byId("budget");
+      const rateEl = byId("rate");
+      const syncUrlEl = byId("syncUrl");
+      const tripName = (tripNameEl?.value || "").trim() || "日本旅行";
+      const budget = Number(budgetEl?.value || 0);
+      const rate = Number(rateEl?.value || 0);
+      if (budget < 0 || rate <= 0) return alert("請輸入正確的預算與匯率。");
+      data.tripName = tripName;
+      data.budget = budget;
+      data.rate = rate;
+      data.syncUrl = (syncUrlEl?.value || "").trim();
+      saveData();
+      renderAll();
+      if (!silent) alert("旅程設定已儲存！");
+    }
+
+    async function syncDataToCloud(btn) {
+      if (!data.syncUrl) return alert("請先輸入 Apps Script Web App URL");
+      try {
+        const originalText = btn.textContent;
+        btn.textContent = "上傳中...";
+        btn.disabled = true;
+        
+        const response = await fetch(data.syncUrl, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: { "Content-Type": "text/plain;charset=utf-8" }
+        });
+        const result = await response.json();
+        
+        btn.textContent = originalText;
+        btn.disabled = false;
+        
+        if (result.status === "success") {
+          alert("上傳雲端成功！");
+        } else {
+          alert("上傳失敗：" + result.message);
+        }
+      } catch (err) {
+        btn.textContent = "上傳至雲端";
+        btn.disabled = false;
+        alert("上傳發生錯誤，請確認網址或網路連線。");
+        console.error(err);
+      }
+    }
+
+    async function syncDataFromCloud(btn) {
+      if (!data.syncUrl) return alert("請先輸入 Apps Script Web App URL");
+      if (!confirm("這將會覆蓋目前的本機資料，確定要下載嗎？")) return;
+      try {
+        const originalText = btn.textContent;
+        btn.textContent = "下載中...";
+        btn.disabled = true;
+        
+        const response = await fetch(data.syncUrl);
+        const result = await response.json();
+        
+        btn.textContent = originalText;
+        btn.disabled = false;
+        
+        if (result.status === "success" && result.data) {
+          const currentSyncUrl = data.syncUrl;
+          data = normalizeData(JSON.parse(result.data));
+          data.syncUrl = currentSyncUrl;
+          saveData();
+          renderAll();
+          alert("下載雲端資料成功！");
+        } else {
+          alert("下載失敗，雲端可能還沒有資料。");
+        }
+      } catch (err) {
+        btn.textContent = "從雲端下載";
+        btn.disabled = false;
+        alert("下載發生錯誤，請確認網址或網路連線。");
+        console.error(err);
+      }
+    }
+
+    function addExpense() {
+      const date = byId("date")?.value || "";
+      const amount = Number(byId("amount")?.value || 0);
+      const category = byId("category")?.value || "";
+      const place = (byId("place")?.value || "").trim();
+      const payment = byId("payment")?.value || "現金";
+      const note = (byId("note")?.value || "").trim();
+      if (!date || amount <= 0 || !category) return alert("請確認日期、金額與類別。");
+      data.expenses.push({
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+        date,
+        amount,
+        category,
+        place,
+        payment,
+        note
+      });
+      saveData();
+      setValue("amount", "");
+      setValue("place", "");
+      setValue("note", "");
+      switchTab("home");
+    }
+
+    function quickAdd(category) {
+      switchTab("add");
+      setValue("category", category);
+      byId("amount")?.focus();
+    }
+
+    function deleteExpense(id) {
+      if (!confirm("確定要刪除這筆消費嗎？")) return;
+      data.expenses = data.expenses.filter(item => item.id !== id);
+      saveData();
+      renderAll();
+    }
+
+    function addCategory() {
+      const emoji = (byId("newEmoji")?.value || "").trim() || "📌";
+      const name = (byId("newCategory")?.value || "").trim();
+      if (!name) return alert("請輸入類別名稱。");
+      if (data.categories.some(cat => cat.name === name)) return alert("這個類別已經存在。");
+      data.categories.push({ name, emoji });
+      saveData();
+      setValue("newEmoji", "");
+      setValue("newCategory", "");
+      renderAll();
+    }
+
+    function deleteCategory(name) {
+      if (!confirm(`確定要刪除「${name}」類別嗎？`)) return;
+      data.categories = data.categories.filter(cat => cat.name !== name);
+      saveData();
+      renderAll();
+    }
+
+    function escapeHTML(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeJSString(value) {
+      return String(value || "").replaceAll("\\", "\\\\").replaceAll("'", "\\'");
+    }
+
+    function expenseRows(expenses) {
+      if (!expenses.length) return `<div class="empty">目前還沒有消費紀錄。</div>`;
+      const rows = [...expenses]
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+        .map(item => `
+          <tr>
+            <td>${escapeHTML(item.date)}</td>
+            <td>${moneyYen(item.amount)}</td>
+            <td>${moneyNtd(Number(item.amount) * data.rate)}</td>
+            <td>${escapeHTML(item.category)}</td>
+            <td>${escapeHTML(item.place) || "—"}</td>
+            <td>${escapeHTML(item.payment)}</td>
+            <td>${escapeHTML(item.note) || "—"}</td>
+            <td><button class="delete" onclick="deleteExpense('${escapeJSString(item.id)}')">刪除</button></td>
+          </tr>
+        `).join("");
+      return `<table><thead><tr><th>日期</th><th>日幣</th><th>台幣約</th><th>類別</th><th>地點</th><th>付款</th><th>備註</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    function renderHome() {
+      setValue("tripName", data.tripName);
+      setValue("budget", data.budget);
+      setValue("rate", data.rate);
+      setText("sideTripName", data.tripName);
+      setText("heroTrip", data.tripName);
+
+      const total = data.expenses.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+      const remain = data.budget - total;
+      const percent = data.budget ? Math.min(100, Math.max(0, total / data.budget * 100)) : 0;
+
+      setText("totalYen", moneyYen(total));
+      setText("totalNtd", moneyNtd(total * data.rate));
+      setText("remainYen", moneyYen(remain));
+      setText("progressText", `已花費 ${moneyYen(total)} / 預算 ${moneyYen(data.budget)}`);
+      setText("progressPercent", `${percent.toFixed(1)}%`);
+      const progressBar = byId("progressBar");
+      if (progressBar) progressBar.style.width = `${percent}%`;
+
+      const recent = [...data.expenses].sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 8);
+      setHTML("recentTable", expenseRows(recent));
+    }
+
+    function renderAddForm() {
+      const select = byId("category");
+      if (select) {
+        const current = select.value;
+        select.innerHTML = data.categories
+          .map(cat => `<option value="${escapeHTML(`${cat.emoji} ${cat.name}`)}">${escapeHTML(`${cat.emoji} ${cat.name}`)}</option>`)
+          .join("");
+        if (current) select.value = current;
+      }
+      const dateEl = byId("date");
+      if (dateEl && !dateEl.value) dateEl.value = today();
+      setHTML("quickAdd", data.categories.slice(0, 6).map(cat => {
+        const category = `${cat.emoji} ${cat.name}`;
+        return `<button class="quick" onclick="quickAdd('${escapeJSString(category)}')">${escapeHTML(category)}</button>`;
+      }).join(""));
+    }
+
+    function renderSearch() {
+      const keyword = (byId("keyword")?.value || "").trim().toLowerCase();
+      const results = data.expenses.filter(item => `${item.date} ${item.amount} ${item.category} ${item.place} ${item.payment} ${item.note}`.toLowerCase().includes(keyword));
+      setHTML("searchTable", expenseRows(results));
+    }
+
+    function clearSearch() {
+      setValue("keyword", "");
+      renderSearch();
+    }
+
+    function renderCategories() {
+      setHTML("categoryList", data.categories.map(cat => `
+        <div class="category-pill">
+          <span>${escapeHTML(`${cat.emoji} ${cat.name}`)}</span>
+          <button class="delete" onclick="deleteCategory('${escapeJSString(cat.name)}')">刪除</button>
+        </div>
+      `).join(""));
+    }
+
+    function groupBy(keyFn) {
+      const result = {};
+      data.expenses.forEach(item => {
+        const key = keyFn(item) || "未分類";
+        result[key] = (result[key] || 0) + Number(item.amount || 0);
+      });
+      return result;
+    }
+
+    function renderBarStats(title, grouped, total) {
+      const entries = Object.entries(grouped).sort((a, b) => b[1] - a[1]);
+      if (!entries.length) return `<p class="hint">尚無${escapeHTML(title)}資料。</p>`;
+      return `<h3>${escapeHTML(title)}</h3>${entries.map(([name, amount]) => {
+        const percent = total ? amount / total * 100 : 0;
+        return `
+          <div class="stats-line">
+            <strong>${escapeHTML(name)}</strong>
+            <div class="bar-bg"><div class="bar" style="width:${percent}%"></div></div>
+            <span>${percent.toFixed(1)}%</span>
+          </div>
+          <div class="hint">${moneyYen(amount)} ≈ ${moneyNtd(amount * data.rate)}</div>
+        `;
+      }).join("")}`;
+    }
+
+    function renderStats() {
+      const total = data.expenses.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+      setHTML("statsContent", `
+        <div class="grid">
+          <div class="summary pink"><div class="icon">👛</div><span>總花費</span><strong>${moneyYen(total)}</strong></div>
+          <div class="summary green"><div class="icon">💵</div><span>約台幣</span><strong>${moneyNtd(total * data.rate)}</strong></div>
+          <div class="summary blue"><div class="icon">🧾</div><span>平均每筆</span><strong>${moneyYen(data.expenses.length ? total / data.expenses.length : 0)}</strong></div>
+        </div>
+        ${renderBarStats("依類別統計", groupBy(item => item.category), total)}
+        <br>
+        ${renderBarStats("依付款方式統計", groupBy(item => item.payment), total)}
+        <br>
+        ${renderBarStats("依日期統計", groupBy(item => item.date), total)}
+      `);
+    }
+
+    function renderAll() {
+      renderHome();
+      renderAddForm();
+      renderSearch();
+      renderCategories();
+      renderStats();
+      // Ensure syncUrl is displayed
+      setValue("syncUrl", data.syncUrl || "");
+    }
+
+    function runTests() {
+      console.assert(byId("mainTitle"), "mainTitle should exist");
+      console.assert(byId("heroTrip"), "heroTrip should exist");
+      console.assert(!byId("heroRemain"), "heroRemain was removed and should not be required");
+      console.assert(moneyYen(1280) === "¥1,280", "moneyYen should format yen");
+      console.assert(moneyNtd(275.2) === "NT$275", "moneyNtd should round and format NTD");
+      console.assert(Array.isArray(data.categories), "categories should be an array");
+      console.assert(Array.isArray(data.expenses), "expenses should be an array");
+    }
+
+    renderAll();
+    runTests();
+  </script>
+</body>
+</html>
