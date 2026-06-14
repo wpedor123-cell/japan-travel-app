@@ -262,7 +262,7 @@
         <div class="logo" style="margin: 0;">
         <img class="logo-img" src="j2.png">
         </div>
-        <span style="position: absolute; bottom: 0px; right: -20px; background: var(--sakura); color: white; padding: 4px 10px; border-radius: 12px; font-weight: bold; font-size: 14px; box-shadow: var(--shadow);">v16</span>
+        <span style="position: absolute; bottom: 0px; right: -20px; background: var(--sakura); color: white; padding: 4px 10px; border-radius: 12px; font-weight: bold; font-size: 14px; box-shadow: var(--shadow);">v17</span>
       </div>
 
       <nav class="nav">
@@ -285,7 +285,7 @@
         <div class="page-title">
           <h1 id="mainTitle">首頁</h1>
         </div>
-        <button class="btn sakura" onclick="switchTab('add')">＋ 新增消費</button>
+        <button class="btn sakura" onclick="editingId=null; const btn=byId('addExpenseBtn'); if(btn) btn.textContent='加入記帳'; switchTab('add')">＋ 新增消費</button>
       </div>
 
       <section id="home" class="page active">
@@ -348,7 +348,7 @@
             <div><label>付款方式</label><select id="payment"><option>現金</option><option>信用卡</option><option>Suica / IC 卡</option><option>PayPay</option><option>其他</option></select></div>
             <div><label>備註</label><input id="note" placeholder="一蘭拉麵" /></div>
           </div>
-          <br><button class="btn sakura" onclick="addExpense()">加入記帳</button>
+          <br><button id="addExpenseBtn" class="btn sakura" onclick="addExpense()">加入記帳</button>
         </div>
       </section>
 
@@ -460,6 +460,7 @@
     };
 
     let data = loadData();
+    let editingId = null;
 
     function clone(obj) {
       return JSON.parse(JSON.stringify(obj));
@@ -554,7 +555,14 @@
       renderAll();
     }
 
-    document.querySelectorAll(".tab-btn").forEach(btn => btn.addEventListener("click", () => switchTab(btn.dataset.tab)));
+    document.querySelectorAll(".tab-btn").forEach(btn => btn.addEventListener("click", () => {
+      if (btn.dataset.tab === "add") {
+        editingId = null;
+        const addBtn = byId("addExpenseBtn");
+        if (addBtn) addBtn.textContent = "加入記帳";
+      }
+      switchTab(btn.dataset.tab);
+    }));
 
     function saveSettings(silent = false) {
       const tripNameEl = byId("tripName");
@@ -738,16 +746,31 @@
       const payment = byId("payment")?.value || "現金";
       const note = (byId("note")?.value || "").trim();
       if (!date || amount <= 0 || !category) return alert("請確認日期、金額與類別。");
-      data.expenses.push({
-        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-        date,
-        amount,
-        category,
-        place,
-        payment,
-        note,
-        updatedAt: Date.now()
-      });
+
+      if (editingId) {
+        const index = data.expenses.findIndex(e => e.id === editingId);
+        if (index !== -1) {
+          data.expenses[index] = {
+            ...data.expenses[index],
+            date, amount, category, place, payment, note,
+            updatedAt: Date.now()
+          };
+        }
+        editingId = null;
+        const addBtn = byId("addExpenseBtn");
+        if (addBtn) addBtn.textContent = "加入記帳";
+      } else {
+        data.expenses.push({
+          id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+          date,
+          amount,
+          category,
+          place,
+          payment,
+          note,
+          updatedAt: Date.now()
+        });
+      }
       data.lastModified = Date.now();
       saveData();
       setValue("amount", "");
@@ -756,7 +779,28 @@
       switchTab("home");
     }
 
+    function editExpense(id) {
+      const item = data.expenses.find(e => e.id === id);
+      if (!item) return;
+      
+      setValue("date", item.date);
+      setValue("amount", item.amount);
+      setValue("category", item.category);
+      setValue("place", item.place);
+      setValue("payment", item.payment);
+      setValue("note", item.note);
+      
+      editingId = id;
+      const btn = byId("addExpenseBtn");
+      if (btn) btn.textContent = "儲存修改";
+      
+      switchTab("add");
+    }
+
     function quickAdd(category) {
+      editingId = null;
+      const addBtn = byId("addExpenseBtn");
+      if (addBtn) addBtn.textContent = "加入記帳";
       switchTab("add");
       setValue("category", category);
       byId("amount")?.focus();
@@ -830,7 +874,12 @@
             <td>${escapeHTML(item.place) || "—"}</td>
             <td>${escapeHTML(item.payment)}</td>
             <td>${escapeHTML(item.note) || "—"}</td>
-            <td><button class="delete" onclick="deleteExpense('${escapeJSString(item.id)}')">刪除</button></td>
+            <td>
+              <div style="display:flex; gap:4px;">
+                <button class="delete" style="background:#eef6fd; color:var(--blue-dark);" onclick="editExpense('${escapeJSString(item.id)}')">修改</button>
+                <button class="delete" onclick="deleteExpense('${escapeJSString(item.id)}')">刪除</button>
+              </div>
+            </td>
           </tr>
         `).join("");
       return `<table><thead><tr><th>日期</th><th>日幣</th><th>台幣約</th><th>類別</th><th>地點</th><th>付款</th><th>備註</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
@@ -855,8 +904,8 @@
       const progressBar = byId("progressBar");
       if (progressBar) progressBar.style.width = `${percent}%`;
 
-      const recent = [...data.expenses].sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 8);
-      setHTML("recentTable", expenseRows(recent));
+      const allExp = [...data.expenses].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      setHTML("recentTable", expenseRows(allExp));
     }
 
     function renderAddForm() {
